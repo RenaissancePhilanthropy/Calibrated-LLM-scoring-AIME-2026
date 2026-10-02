@@ -1,6 +1,6 @@
 # Calibrated, Interpretable Automated Scoring with LLM Likelihoods
 
-This repo holds code to reproduce the four figures of the AIME 2026 work-in-progress paper Calibrated, Interpretable Automated Scoring with LLM Likelihoods.
+This repo holds code to reproduce the four figures of the AIME-Con 2026 work-in-progress paper Calibrated, Interpretable Automated Scoring with LLM Likelihoods.
 The paper itself is `aime-2026-paper.pdf`.
 
 ## How to run
@@ -108,6 +108,37 @@ so `05` may not reproduce the paper's numbers as the provider updates them.
 
 `figures/reference/` holds the four figures exactly as published; compare
 `figures/generated/` against them.
+
+## Citation
+
+The paper appears in the Works in Progress volume of the AIME-Con 2026 proceedings
+(Pittsburgh, October 2026), published by NCME through the ACL Anthology:
+
+S. Thomas Christie, Markus Hauru, and Anna N. Rafferty. 2026. Calibrated, Interpretable
+Automated Scoring with LLM Likelihoods. In *Proceedings of the Artificial Intelligence in
+Measurement and Education Conference (AIME-Con): Works in Progress*, pages 168–176,
+Pittsburgh, Pennsylvania, United States. National Council on Measurement in Education (NCME).
+https://aclanthology.org/2026.aimecon-wip.22/
+
+```bibtex
+@inproceedings{christie-etal-2026-calibrated,
+    title = "Calibrated, Interpretable Automated Scoring with {LLM} Likelihoods",
+    author = "Christie, S. Thomas  and
+      Hauru, Markus  and
+      Rafferty, Anna N.",
+    editor = "Wilson, Joshua  and
+      Ormerod, Christopher  and
+      Beiting-Parrish, Magdalen",
+    booktitle = "Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Works in Progress",
+    month = oct,
+    year = "2026",
+    address = "Wyndham Grand Pittsburgh Downtown, Pittsburgh, Pennsylvania, United States",
+    publisher = "National Council on Measurement in Education (NCME)",
+    url = "https://aclanthology.org/2026.aimecon-wip.22/",
+    pages = "168--176",
+    ISBN = "979-8-9983004-1-7"
+}
+```
 
 ## Data and attribution
 
