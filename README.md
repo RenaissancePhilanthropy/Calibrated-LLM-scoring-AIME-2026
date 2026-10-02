@@ -1,6 +1,7 @@
 # Calibrated, Interpretable Automated Scoring with LLM Likelihoods
 
 This repo holds code to reproduce the four figures of the AIME 2026 work-in-progress paper Calibrated, Interpretable Automated Scoring with LLM Likelihoods.
+The paper itself is `aime-2026-paper.pdf`.
 
 ## How to run
 
@@ -128,6 +129,7 @@ Two items (the Fig 4 examples) are reproduced verbatim in `figures/interp_figs.R
 ## Repo layout
 
 ```
+aime-2026-paper.pdf       the paper
 scientsbank.py            dataset loader (used by direct and judge)
 common.py                 helpers used by more than one stage
 channel/                  channel runner + config
