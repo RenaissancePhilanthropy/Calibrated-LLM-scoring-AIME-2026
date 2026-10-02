@@ -1,0 +1,15 @@
+model = "Qwen/Qwen3.5-9B-Base"
+common_context_format = 'The question the student was answering is as follows: "{question}". The correct and complete reference answer that we compared against is as follows: "{reference_answer}".'
+content_format = "{student_answer}\n"
+template = """\
+A school student has been asked a question in an exam, and we have their answer. We also have a reference answer that we have compared the student's answer to.
+
+{common_context}
+
+It is clear from the student's answer and from comparing against the reference answer that the student's answer is {context}
+
+The student's answer was: {content}"""
+
+[contexts]
+CORRECT = "correct: It is a complete and correct paraphrase of the reference answer."
+INCORRECT = "incorrect: It may contain some but not all information in the reference answer, have some incorrect information, contradict the reference answer, or it may be irrelevant to the question."

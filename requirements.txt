@@ -1,0 +1,16 @@
+# Exact versions used to produce the paper's numbers.
+torch==2.11.0
+transformers==5.4.0
+datasets==4.8.4
+numpy==2.4.4
+pandas==3.0.1
+scipy==1.17.1
+python-dotenv==1.2.2
+tomli-w==1.2.0
+sentencepiece==0.2.1
+protobuf==7.34.1
+accelerate==1.13.0
+openai==2.33.0
+# Imported directly by channel/evaluate_per_sample_context.py. It arrives as a
+# channel-models dependency, which only declares a floor, so pin it here too.
+tqdm==4.67.3

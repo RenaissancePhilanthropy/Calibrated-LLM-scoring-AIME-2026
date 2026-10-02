@@ -1,0 +1,185 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "channel-models"
+version = "0.1.0"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["education", "assessment", "nlp", "diagnostic"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Education",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "torch>=2.0.0",
+    "transformers>=4.35.0",
+    "accelerate>=0.25.0",
+    "sentencepiece>=0.1.99",
+    "protobuf>=4.25.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+    "huggingface-hub>=0.19.0",
+    "numpy>=1.24.0",
+    "scipy>=1.11.0",
+    "scikit-learn>=1.3.0",
+    "termcolor>=3.1.0",
+    "tqdm>=4.65.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pyright>=1.1.408",
+    "pre-commit>=3.4.0",
+    "line_profiler",
+    "ruff~=0.15",
+    "pandas-stubs>=2.3.3.260113",
+    "scipy-stubs>=1.15.3.0",
+]
+docs = [
+    "sphinx>=7.0.0",
+    "sphinx-rtd-theme>=1.3.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["channel_models*"]
+
+[tool.setuptools.package-data]
+"channel_models" = ["*.json", "*.jsonl", "*.txt", "*.csv"]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+# The philosophy for our linting rules is opt-out: By default we check everything, and
+# every omission needs justification. Any entries in the `ignore` list should both
+# 1) Describe what the rule does.
+# 2) Why we don't want it.
+# This is not trying to stop you from disabling counter-productive rules, but to force
+# us to make deliberate decisions and keep our linting rules as strict as is reasonable.
+# Note that the ruff docs have more details on each rule.
+select = ["ALL"]
+ignore = [
+    # Docstring rules we don't want because we haven't yet started formatting our docstrings
+    # rigorously. TODO: Enable this later.
+    "D",
+    # Forbid assert usage. We currently use a lot of asserts. We should eventually move to
+    # more informative errors, but for now this rule is too noisy. TODO: Enabled
+    # this later.
+    "S101",
+    # trailing commas — conflicts with ruff formatter, which recommends disabling this rule
+    "COM812",
+    # TODO comment strictness (author, issue link, fixme warnings). We are not doing TODO
+    # notes with this level of rigor.
+    "TD002",
+    "TD003",
+    "FIX002",
+    # McCabe complexity too high. McCabe complexity isn't a very helpful metric.
+    "C901",
+    # Forbid use of string literals and f-strings in error messages. It claims to keep backtraces
+    # prettier, but it's not worth the cost of adding trivial variables in the code.
+    "EM",
+    # Forbid the use of boolean positional arguments. We don't agree that this is a bad thing to do.
+    "FBT",
+    # Forbid having code folders that don't have an __init__.py. Think this can be desirable
+    # for code that is not meant to be imported.
+    "INP001",
+    # These forbid having "too many" of various things: Too many arguments in a function, too many
+    # statemens in a function body, etc. The principle is good, but having hard-coded limits like
+    # these is too rigid.
+    "PLR0904",
+    "PLR0911",
+    "PLR0912",
+    "PLR0913",
+    "PLR0914",
+    "PLR0915",
+    "PLR0916",
+    "PLR0917",
+    # Tries to check that subprocess.run isn't called on input that isn't validated. Too prone
+    # to false positives to be useful.
+    "S603",
+    # Forbids long error messages, saying they should be part of the exception class instead.
+    # Overengineering for our needs.
+    "TRY003",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Some rules make sense in the library code, but not in our tests:
+# * PLR2005: Forbid comparisons to magic constant values. Magic-value comparisons are ubiquitous in test
+# assertions, and that's okay.
+# * ANN: Type annotations in tests aren't nearly as useful as in implementation code, and add a lot of
+# verbosity to the files.
+# * NPY002: Forbids using the old-style global random number generator in NumPy. This may be worth fixing
+# eventually, but in the tests the harm is minimal, and it would add boilerplate code.
+# * S6007: Forbids calling subprocess.run with a partial executable path, like just calling `R`.
+# Meant for security, overkill in our case when used in tests.
+# * SLF001: Tests legitimately access private members to test internal behavior.
+"tests/**" = ["PLR2004", "ANN", "NPY002", "SLF001"]
+# I001: the scipy and sklearn import lines carry # type: ignore[...] comments that push them
+# over 88 chars. Ruff would expand them into multi-line form, but pyright requires the
+# type: ignore comment to be on the `from` line to suppress import errors -- the multi-line
+# `(` line does not propagate suppression to the symbol lines. Single-line form is intentional.
+"src/channel_models/nll_calculator.py" = ["I001"]
+
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.10"
+typeCheckingMode = "strict"
+venvPath = "."
+venv = ".venv"
+
+# Tests legitimately access private/protected members to test internal behavior.
+[[tool.pyright.executionEnvironments]]
+root = "tests"
+reportPrivateUsage = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=channel_models",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+]
+markers = []
+
+[tool.coverage.run]
+source = ["channel_models"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]

@@ -1,0 +1,51 @@
+# Direct method configuration.
+#
+# Uses NLLCalculator in the *flipped* direction:
+#   contexts = sample texts (N), contents = label strings + terminator (K).
+# Softmax over the per-label log-likelihoods gives per-class probabilities.
+#
+# The label descriptions below mirror the class statements the channel
+# method uses ([contexts] in channel/config.toml).
+
+model = "meta-llama/Llama-3.2-3B"
+seed = 42
+batch_size = 4
+
+# Environment variable name that holds the Hugging Face access token for
+# gated repos (Llama 3.x). Forwarded to NLLCalculator's `key_name`
+# parameter, which calls `os.getenv(key_name)` at model-load time.
+# Non-gated models (Qwen) simply ignore the extra token argument.
+key_name = "HF_TOKEN"
+
+# Appended to each label content string before scoring, so that the label
+# candidates are complete events rather than nested prefixes. `\n` is
+# in-distribution for base LMs and is unambiguously a real token in every
+# BPE tokenizer used here.
+terminator = "\n"
+
+
+# ---------------------------------------------------------------------------
+# SciEntsBank 2-way. The prompt states the question, the reference answer and
+# the student's answer in plain prose, and mirrors the wording of the channel
+# config and the judge block.
+# WHITESPACE IS LOAD-BEARING: run.py concatenates prefix + suffix, so the
+# prefix ending without a newline and the suffix starting with two newlines is
+# part of the exact prompt text that produced the paper's numbers. Do not
+# reformat.
+# ---------------------------------------------------------------------------
+[datasets.scientsbank_2way_final]
+prompt_skeleton_prefix = """\
+A school student has been asked a question in an exam, and we have their answer. We also have a reference answer that we have compared the student's answer to. The student's answer is classified as exactly one of the following:
+{categories_str}"""
+prompt_skeleton_suffix = """
+
+
+{context}
+
+It is clear from the student's answer and from comparing against the reference answer that the student's answer is {content}"""
+
+[datasets.scientsbank_2way_final.labels]
+correct = "It is a complete and correct paraphrase of the reference answer."
+incorrect = "It may contain some but not all information in the reference answer, have some incorrect information, contradict the reference answer, or it may be irrelevant to the question."
+
+
