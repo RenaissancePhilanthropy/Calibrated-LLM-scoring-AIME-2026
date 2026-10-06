@@ -123,9 +123,9 @@ Education (NCME). https://aclanthology.org/2026.aimecon-wip.22/
 ```bibtex
 @inproceedings{christie-etal-2026-calibrated,
     title = "Calibrated, Interpretable Automated Scoring with {LLM} Likelihoods",
-    author = "Christie, Thomas  and
+    author = "Christie, S. Thomas  and
       Hauru, Markus  and
-      Rafferty, Anna",
+      Rafferty, Anna N.",
     editor = "Wilson, Joshua  and
       Ormerod, Christopher  and
       Beiting-Parrish, Magdalen",
