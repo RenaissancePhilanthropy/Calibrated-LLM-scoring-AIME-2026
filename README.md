@@ -114,22 +114,22 @@ so `05` may not reproduce the paper's numbers as the provider updates them.
 The paper appears in the Works in Progress volume of the AIME-Con 2026 proceedings
 (Pittsburgh, October 2026), published by NCME through the ACL Anthology:
 
-S. Thomas Christie, Markus Hauru, and Anna N. Rafferty. 2026. Calibrated, Interpretable
-Automated Scoring with LLM Likelihoods. In *Proceedings of the Artificial Intelligence in
-Measurement and Education Conference (AIME-Con): Works in Progress*, pages 168–176,
-Pittsburgh, Pennsylvania, United States. National Council on Measurement in Education (NCME).
-https://aclanthology.org/2026.aimecon-wip.22/
+Thomas Christie, Markus Hauru, and Anna Rafferty. 2026. Calibrated, Interpretable Automated
+Scoring with LLM Likelihoods. In *Proceedings of the Artificial Intelligence in Measurement and
+Education Conference (AIME-Con): Works in Progress*, pages 168–176, Wyndham Grand Pittsburgh
+Downtown, Pittsburgh, Pennsylvania, United States. National Council on Measurement in
+Education (NCME). https://aclanthology.org/2026.aimecon-wip.22/
 
 ```bibtex
 @inproceedings{christie-etal-2026-calibrated,
     title = "Calibrated, Interpretable Automated Scoring with {LLM} Likelihoods",
-    author = "Christie, S. Thomas  and
+    author = "Christie, Thomas  and
       Hauru, Markus  and
-      Rafferty, Anna N.",
+      Rafferty, Anna",
     editor = "Wilson, Joshua  and
       Ormerod, Christopher  and
       Beiting-Parrish, Magdalen",
-    booktitle = "Proceedings of the Artificial Intelligence in Measurement and Education Conference (AIME-Con): Works in Progress",
+    booktitle = "Proceedings of the Artificial Intelligence in Measurement and Education Conference ({AIME}-Con): Works in Progress",
     month = oct,
     year = "2026",
     address = "Wyndham Grand Pittsburgh Downtown, Pittsburgh, Pennsylvania, United States",
